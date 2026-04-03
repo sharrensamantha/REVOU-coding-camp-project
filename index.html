@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Expense & Budget Visualizer</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-target="overview-section">
+          <span class="icon">📊</span> Overview
+        </button>
+        <button class="nav-item" data-target="breakdown-section">
+          <span class="icon">📉</span> Spending Breakdown
+        </button>
+        <button class="nav-item" data-target="chart-section">
+          <span class="icon">🥧</span> Charts
+        </button>
+        <button class="nav-item" data-target="category-section">
+          <span class="icon">🏷️</span> Manage Categories
+        </button>
+        <button class="nav-item" data-target="threshold-section">
+          <span class="icon">🚧</span> Thresholds
+        </button>
+      </nav>
+      
+      <!-- Theme Toggle inside sidebar at bottom -->
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" id="theme-toggle">
+          <span id="theme-text">🌙 Dark Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="top-header">
+        <h1 id="page-title">Overview</h1>
+        <div class="header-date"><a href="https://sharrensamantha.github.io">my portofolio</a></div>
+      </header>
+
+      <!-- SECTION 1: Overview (Calendar & Balance) -->
+      <section id="overview-section" class="content-section active">
+        <div class="balance-card">
+          <h3>Expenses this month</h3>
+          <div id="balance-display" class="balance-amount">$0.00</div>
+        </div>
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <button id="prev-month" class="cal-nav">‹</button>
+            <h3 id="current-month">April 2026</h3>
+            <button id="next-month" class="cal-nav">›</button>
+          </div>
+          <div class="calendar-grid" id="calendar-grid">
+            <!-- JS generates days -->
+          </div>
+          <div class="add-transaction-box">
+            <h3>Add Transaction</h3>
+            <form id="transaction-form" class="compact-form">
+              <div class="form-row">
+                <input type="text" name="name" placeholder="Item name (e.g. Coffee)" required />
+                <input type="number" name="amount" placeholder="Amount" step="0.01" required />
+                <select name="category" required>
+                  <option value="">Category</option>
+                </select>
+                <button type="submit" class="btn-primary">Add</button>
+              </div>
+            </form>
+            <div id="form-errors" class="error-text"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Spending Breakdown (List with Progress Bars) -->
+      <section id="breakdown-section" class="content-section">
+        <div class="breakdown-list" id="breakdown-list">
+          <!-- JS generates category rows with bars here -->
+          <p class="empty-state">Add transactions to see your spending breakdown.</p>
+        </div>
+        
+        <!-- TRADITIONAL TRANSACTION LIST (Option B) -->
+        <div class="transaction-history" style="margin-top: 2rem;">
+          <h3>Transaction History</h3>
+          
+          <!-- Sort Controls -->
+          <div id="sort-controls" class="sort-controls">
+            <button id="sort-amount-asc" type="button">Amount ↑</button>
+            <button id="sort-amount-desc" type="button">Amount ↓</button>
+            <button id="sort-category-asc" type="button">Category A–Z</button>
+          </div>
+          
+          <!-- Transaction List -->
+          <ul id="transactions-ul" class="transaction-list" aria-label="Transactions">
+            <!-- JS populates this -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Charts -->
+      <section id="chart-section" class="content-section">
+        <div class="chart-wrapper">
+          <canvas id="chart-canvas" width="400" height="400"></canvas>
+        </div>
+      </section>
+
+      <!-- SECTION 4: Manage Categories -->
+      <section id="category-section" class="content-section">
+        <div class="card">
+          <h3>Add New Category</h3>
+          <form id="add-category-form">
+            <input type="text" name="new-category" placeholder="Category Name" required />
+            <input type="color" name="category-color" value="#5B8DB8" />
+            <button type="submit" class="btn-primary">Add Category</button>
+          </form>
+          <div id="category-errors" class="error-text"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: Thresholds -->
+      <section id="threshold-section" class="content-section">
+        <div class="card">
+          <h3>Set Budget Limits</h3>
+          <div id="threshold-inputs"></div>
+        </div>
+      </section>
+      
+      <section id="monthly-summary" aria-label="Monthly summary">
+        <h2>Monthly Summary</h2>
+        <div id="monthly-cards" class="monthly-cards">
+          <!-- Cards will be generated by JavaScript -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
