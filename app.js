@@ -56,7 +56,7 @@ function setupSidebar() {
       pageTitle.textContent = btn.textContent.trim();
       
       // If switching to chart, re-render to ensure size is correct
-      if(targetId === 'chart-section') renderChart(getFilteredTransactions(), AppState.thresholds);
+      if(targetId === 'chart-section') renderChart(getMonthlyTransactions(), AppState.thresholds);
     });
   });
 }
@@ -476,6 +476,12 @@ export function handleFormSubmit(event) {
 
   saveState(AppState);
   form.reset();
+  render();
+}
+
+export function handleDeleteTransaction(id) {
+  AppState.transactions = AppState.transactions.filter(t => t.id !== id);
+  saveState(AppState);
   render();
 }
 
